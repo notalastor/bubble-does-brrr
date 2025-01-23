@@ -1,0 +1,107 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpkdm0huijkys"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_g0na5"]
+[ext_resource type="Shader" path="res://scripts/background.gdshader" id="2_vj50g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1ooe"]
+shader = ExtResource("2_vj50g")
+shader_parameter/background_color = Color(2.40654e-06, 0.587579, 0.794233, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_21s2a"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g0na5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_m1ooe")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -45.0
+offset_right = 126.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Begin" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.815686, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.431373, 1, 1)
+theme_override_constants/outline_size = 37
+theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_21s2a")
+text = "Begin"
+
+[node name="GET OUT" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.815686, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.431373, 1, 1)
+theme_override_constants/outline_size = 37
+theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_21s2a")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_21s2a")
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -222.0
+offset_right = 163.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0, 0.815686, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.431373, 1, 1)
+theme_override_constants/outline_size = 37
+theme_override_font_sizes/font_size = 96
+text = "Bubble"
+
+[connection signal="mouse_entered" from="VBoxContainer/Begin" to="." method="_on_begin_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Begin" to="." method="_on_begin_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/Begin" to="." method="_on_begin_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/GET OUT" to="." method="_on_get_out_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/GET OUT" to="." method="_on_get_out_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/GET OUT" to="." method="_on_get_out_pressed"]
