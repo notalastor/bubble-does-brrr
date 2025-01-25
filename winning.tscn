@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://r40au48cjvtu"]
+
+[ext_resource type="Shader" path="res://winning.gdshader" id="1_rswkj"]
+[ext_resource type="FontFile" uid="uid://dl5b1gwcddscr" path="res://assets/Sencillo Handdrawn.ttf" id="2_vt8dx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wdamx"]
+shader = ExtResource("1_rswkj")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = true
+shader_parameter/quantize_to = 1.7
+shader_parameter/sine_amplitude = Vector2(1, 33.25)
+shader_parameter/sine_speed = Vector2(1, 1)
+
+[node name="winning" type="CanvasLayer"]
+
+[node name="Label2" type="Label" parent="."]
+material = SubResource("ShaderMaterial_wdamx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+theme_override_colors/font_color = Color(0.419442, 0.85816, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.567005, 0.820539, 1)
+theme_override_constants/outline_size = 37
+theme_override_fonts/font = ExtResource("2_vt8dx")
+theme_override_font_sizes/font_size = 160
+text = "YOU DID 
+G R E A T !"
+horizontal_alignment = 1
+vertical_alignment = 1

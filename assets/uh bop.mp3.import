@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4alay53n7xn0"
+path="res://.godot/imported/uh bop.mp3-33e3b0a680013697b69555a3b83ea3ad.mp3str"
+
+[deps]
+
+source_file="res://assets/uh bop.mp3"
+dest_files=["res://.godot/imported/uh bop.mp3-33e3b0a680013697b69555a3b83ea3ad.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

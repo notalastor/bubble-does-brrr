@@ -1,0 +1,213 @@
+[gd_scene load_steps=13 format=3 uid="uid://dujt072fg5slp"]
+
+[ext_resource type="Shader" path="res://scripts/background.gdshader" id="1_gnd5l"]
+[ext_resource type="Script" path="res://edn.gd" id="1_xj4qw"]
+[ext_resource type="Texture2D" uid="uid://d37hliap3hpro" path="res://assets/Br.png" id="2_psx7m"]
+[ext_resource type="Shader" path="res://scenes/transition.gdshader" id="4_nf5g0"]
+[ext_resource type="FontFile" uid="uid://dl5b1gwcddscr" path="res://assets/Sencillo Handdrawn.ttf" id="5_i5rek"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6u1kw"]
+shader = ExtResource("1_gnd5l")
+shader_parameter/background_color = Color(2.40654e-06, 0.587579, 0.794233, 1)
+
+[sub_resource type="Curve" id="Curve_64vna"]
+_data = [Vector2(0.779914, 0.758491), 0.0, 0.0, 0, 0, Vector2(0.938034, 0.381132), 0.0, 0.0, 0, 0, Vector2(1, 0.109434), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_1wv25"]
+offsets = PackedFloat32Array(0.674419, 0.976744, 1)
+colors = PackedColorArray(0.972093, 0.972093, 0.972093, 1, 0.972093, 0.972093, 0.972093, 1, 0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nndb5"]
+shader = ExtResource("4_nf5g0")
+shader_parameter/saw_b_shift = -0.267
+shader_parameter/saw_a_interval = 0.0
+shader_parameter/saw_b_interval = 1.015
+shader_parameter/saw_a_scale = 1.0
+shader_parameter/saw_b_scale = 0.821
+shader_parameter/uv_scale = Vector2(3, 8)
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/right = 0.0
+shader_parameter/left = -1.0
+
+[sub_resource type="Animation" id="Animation_dtd7c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_svpmk"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.0, 3.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ita70"]
+_data = {
+"RESET": SubResource("Animation_dtd7c"),
+"start": SubResource("Animation_svpmk")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xj4qw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6u1kw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect"]
+position = Vector2(577, 762)
+amount = 25
+lifetime = 10.0
+speed_scale = 0.7
+texture = ExtResource("2_psx7m")
+emission_shape = 3
+emission_rect_extents = Vector2(500, 1)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 10)
+initial_velocity_max = 423.95
+angular_velocity_min = 5.0
+angular_velocity_max = 50.0
+angle_max = 17.3
+scale_amount_min = 0.1
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_64vna")
+color_ramp = SubResource("Gradient_1wv25")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_nndb5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ita70")
+}
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -315.0
+offset_right = 163.0
+offset_bottom = -183.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0, 0.815686, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.431373, 1, 1)
+theme_override_constants/outline_size = 37
+theme_override_fonts/font = ExtResource("5_i5rek")
+theme_override_font_sizes/font_size = 96
+text = "SPLIT !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -25.0
+offset_right = 289.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.548873
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("5_i5rek")
+theme_override_font_sizes/font_size = 56
+text = "DEMO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = 139.0
+offset_right = 384.0
+offset_bottom = 380.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("5_i5rek")
+theme_override_font_sizes/font_size = 56
+text = "thanks for playing !
+i wish you had fun
+the game \"SPLIT!\" made in recorded 25hours
+made by sajjad dehya for GGJ25
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_i5rek")
+theme_override_font_sizes/font_size = 46
+text = "my GGJ account"
+uri = "https://globalgamejam.org/users/evvn81"

@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://nxhgucnsjgdd"]
+
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_etml3"]
+[ext_resource type="Texture2D" uid="uid://d37hliap3hpro" path="res://assets/Br.png" id="2_aeimj"]
+[ext_resource type="Texture2D" uid="uid://bvh07224mxybl" path="res://assets/Background_Eraser.png" id="3_akn12"]
+[ext_resource type="Texture2D" uid="uid://dd53ewdcr18bt" path="res://assets/shoot.png" id="4_k40qp"]
+[ext_resource type="AudioStream" uid="uid://duvpo4s4dfmpm" path="res://assets/pop.mp3" id="5_etldp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8fn1c"]
+radius = 64.4981
+
+[sub_resource type="Curve" id="Curve_wqc1g"]
+_data = [Vector2(0.57906, 0.532075), 0.0, 0.0, 0, 0, Vector2(0.826923, 0.260377), 0.0, 0.0, 0, 0, Vector2(1, 0.109434), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_l861s"]
+offsets = PackedFloat32Array(0.404651, 1)
+colors = PackedColorArray(0.972093, 0.972093, 0.972093, 1, 0, 0, 0, 0)
+
+[node name="bubble" type="CharacterBody2D"]
+script = ExtResource("1_etml3")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_aeimj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8fn1c")
+
+[node name="BackgroundEraser" type="Sprite2D" parent="."]
+position = Vector2(-66, -70)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_akn12")
+
+[node name="pointer" type="Sprite2D" parent="."]
+position = Vector2(-66, -70)
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("4_k40qp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_etldp")
+volume_db = 8.07
+pitch_scale = 1.42
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_etldp")
+volume_db = 10.635
+pitch_scale = 0.72
+attenuation = 6.06286
+panning_strength = 2.45
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+one_shot = true
+speed_scale = 0.7
+explosiveness = 1.0
+randomness = 1.0
+texture = ExtResource("2_aeimj")
+emission_shape = 1
+emission_sphere_radius = 44.0
+direction = Vector2(0, -4.015)
+spread = 180.0
+gravity = Vector2(0, -1000)
+initial_velocity_max = 600.0
+angular_velocity_min = 5.0
+angular_velocity_max = 50.0
+angle_max = 17.3
+scale_amount_min = 0.1
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_wqc1g")
+color_ramp = SubResource("Gradient_l861s")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2yy37yefex6f"]
+
+[ext_resource type="PackedScene" uid="uid://dx8bhud0rb2p5" path="res://scenes/character_body_2d.tscn" id="1_axqd0"]
+
+[node name="shoota" type="CharacterBody2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_axqd0")]

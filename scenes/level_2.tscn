@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmii1bfkkobhw"]
+
+[ext_resource type="Shader" path="res://scripts/background.gdshader" id="1_w2qkx"]
+[ext_resource type="Texture2D" uid="uid://d37hliap3hpro" path="res://assets/Br.png" id="2_opcnv"]
+[ext_resource type="PackedScene" uid="uid://dx8bhud0rb2p5" path="res://scenes/character_body_2d.tscn" id="4_3uv3o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_klsfw"]
+shader = ExtResource("1_w2qkx")
+shader_parameter/background_color = Color(2.55093e-06, 0.349411, 0.47947, 1)
+
+[sub_resource type="Curve" id="Curve_xrd5m"]
+_data = [Vector2(0.779914, 0.758491), 0.0, 0.0, 0, 0, Vector2(0.938034, 0.381132), 0.0, 0.0, 0, 0, Vector2(1, 0.109434), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_xin5e"]
+offsets = PackedFloat32Array(0, 0.609302, 1)
+colors = PackedColorArray(0.641934, 0.641934, 0.641934, 0.772549, 0.972549, 0.972549, 0.972549, 0.658824, 0, 0, 0, 0)
+
+[node name="level2" type="Node2D"]
+position = Vector2(-693, -599)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_klsfw")
+offset_left = 15.0
+offset_top = 171.0
+offset_right = 2603.0
+offset_bottom = 1719.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect"]
+position = Vector2(835, 2093)
+amount = 25
+lifetime = 10.0
+speed_scale = 0.7
+texture = ExtResource("2_opcnv")
+emission_shape = 3
+emission_rect_extents = Vector2(500, 1)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 10)
+initial_velocity_max = 423.95
+angular_velocity_min = 5.0
+angular_velocity_max = 50.0
+angle_max = 17.3
+scale_amount_min = 0.1
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_xrd5m")
+color_ramp = SubResource("Gradient_xin5e")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(48, 48)
+scale = Vector2(1.835, 1.835)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(848, 29, 817, 125, 738, 215, 741, 371, 631, 522, 588, 433, 509, 290, 515, 129, 402, 152, 356, 269, 266, 402, 141, 442, 3, 512, 8, 592, 79, 672, 286, 534, 1147, 668, 1129, 1109, -139, 1123, -300, 911, -334.06, 280.109, -180.382, -118.801)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D/StaticBody2D"]
+polygon = PackedVector2Array(848, 29, 817, 125, 738, 215, 741, 371, 631, 522, 588, 433, 509, 290, 515, 129, 402, 152, 356, 269, 266, 402, 141, 442, 3, 512, 8, 592, 79, 672, 286, 534, 1147, 668, 1129, 1109, -139, 1123, -300, 911, -113, 272, -33.7875, -118.801)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(48, 48)
+scale = Vector2(1.835, 1.835)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(996, 53, 1341, -90, 1691, 41, 1819, 1114, 1038, 1135, 1124, 619, 1063, 558, 1060, 487, 892, 430)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D2/StaticBody2D"]
+polygon = PackedVector2Array(996, 53, 1341, -90, 1691, 41, 1819, 1114, 1038, 1135, 1124, 619, 1063, 558, 1060, 487, 892, 430)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_3uv3o")]
+position = Vector2(819, 498)

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxuucyygxuyi4"]
+
+[ext_resource type="Script" path="res://winner.gd" id="1_qbt8k"]
+[ext_resource type="PackedScene" uid="uid://r40au48cjvtu" path="res://winning.tscn" id="2_a4ijv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbb4j"]
+size = Vector2(351, 75)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_qbt8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_jbb4j")
+
+[node name="winning" parent="." instance=ExtResource("2_a4ijv")]
+visible = false
+
+[node name="Label2" parent="winning" index="0"]
+modulate = Color(1, 1, 1, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="winning"]

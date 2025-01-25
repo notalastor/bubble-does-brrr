@@ -14,9 +14,9 @@ void fragment() {
 	vec3 col = background_color;
 	
 	// Wave animation, layered sin waves
-	float sine = sin(UV.x * 2.0 + (TIME * 0.3)) * 0.1 + 0.6;
+	float sine = sin(UV.x * .0 + (TIME * 0.1)) * 0.1 + 0.4;
 	float sine_2 = abs(sin(UV.x * 5.0 + (TIME * 0.8)) * 0.05);
-	float sine_3 = abs(sin(UV.x * 12.0 + (TIME * 1.2)) * 0.02);
+	float sine_3 = abs(sin(UV.y * 12.0 + (TIME * 1.2)) * 0.02);
 	float mask = 1.0 - step(UV.y, sine + sine_2 + sine_3);
 	col += mask * 0.1;
 	
@@ -31,8 +31,8 @@ void fragment() {
 		vec2 particle = vec2(particle_x, (fract((TIME + time_offset) * (-0.06 * speed_offset)) * 2.0) - 0.5);
 		
 		// Generate circles based on length from point in UV
-		float circle = step(length(UV - particle), 0.04 - scale_factor);
-		float inner_circle = step(length(UV - particle), (0.04 - scale_factor) - 0.005);
+		float circle = step(length(UV - particle), 0.04 - scale_factor)*0.0;
+		float inner_circle = step(length(UV - particle), (0.04 - scale_factor) - 0.005)*0.0;
 		
 		// Add lighter bubble
 		col += (circle - (inner_circle * 0.7)) * 0.1;

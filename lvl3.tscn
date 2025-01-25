@@ -1,0 +1,366 @@
+[gd_scene load_steps=16 format=3 uid="uid://crgi6apavb0ec"]
+
+[ext_resource type="Script" path="res://lvl_3.gd" id="1_2eyer"]
+[ext_resource type="PackedScene" uid="uid://nxhgucnsjgdd" path="res://scenes/bubble.tscn" id="1_56hl8"]
+[ext_resource type="Shader" path="res://scripts/background.gdshader" id="1_amcug"]
+[ext_resource type="Texture2D" uid="uid://d37hliap3hpro" path="res://assets/Br.png" id="2_hdk8q"]
+[ext_resource type="FontFile" uid="uid://dl5b1gwcddscr" path="res://assets/Sencillo Handdrawn.ttf" id="3_jssw2"]
+[ext_resource type="Shader" path="res://scenes/transition.gdshader" id="4_0wfo1"]
+[ext_resource type="PackedScene" uid="uid://cxuucyygxuyi4" path="res://winplace.tscn" id="5_irhf8"]
+[ext_resource type="PackedScene" uid="uid://dnfpkuw403hpm" path="res://scenes/spikestscn.tscn" id="8_h08ap"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nqu1"]
+shader = ExtResource("1_amcug")
+shader_parameter/background_color = Color(2.55093e-06, 0.349411, 0.47947, 1)
+
+[sub_resource type="Curve" id="Curve_qhdxv"]
+_data = [Vector2(0.779914, 0.758491), 0.0, 0.0, 0, 0, Vector2(0.938034, 0.381132), 0.0, 0.0, 0, 0, Vector2(1, 0.109434), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_f4epr"]
+offsets = PackedFloat32Array(0, 0.609302, 1)
+colors = PackedColorArray(0.641934, 0.641934, 0.641934, 0.772549, 0.972549, 0.972549, 0.972549, 0.658824, 0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2pyf"]
+shader = ExtResource("4_0wfo1")
+shader_parameter/saw_b_shift = -0.267
+shader_parameter/saw_a_interval = 0.0
+shader_parameter/saw_b_interval = 0.995
+shader_parameter/saw_a_scale = 1.0
+shader_parameter/saw_b_scale = 0.821
+shader_parameter/uv_scale = Vector2(3, 8)
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/right = 0.0
+shader_parameter/left = -1.0
+
+[sub_resource type="Animation" id="Animation_dtd7c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_svpmk"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.0, 3.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ita70"]
+_data = {
+"RESET": SubResource("Animation_dtd7c"),
+"start": SubResource("Animation_svpmk")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2eyer")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -1404.0
+offset_top = -2921.0
+offset_right = 2286.0
+offset_bottom = -90.0
+color = Color(0, 1, 1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7nqu1")
+offset_left = -3075.0
+offset_top = -246.0
+offset_right = 2566.0
+offset_bottom = 1412.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect"]
+position = Vector2(3268, 1384)
+amount = 25
+lifetime = 10.0
+speed_scale = 0.7
+texture = ExtResource("2_hdk8q")
+emission_shape = 3
+emission_rect_extents = Vector2(500, 1)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 10)
+initial_velocity_max = 423.95
+angular_velocity_min = 5.0
+angular_velocity_max = 50.0
+angle_max = 17.3
+scale_amount_min = 0.1
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_qhdxv")
+color_ramp = SubResource("Gradient_f4epr")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(448, 176)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(299, -241, 715, 63, 868, -11, 1064, -307, 1396, -375, 1552, -187, 1480, 81, 1288, 65, 1104, 85, 802, 201, 799, 300, 1132, 437, 1428, 561, 1640, 561, 1956, 761, 2100, 985, 1974, 1182, 1819, 1161, 1745, 1091, 1702, 979, 1601, 846, 1462, 787, 1232, 739, 954, 611, 704, 524, 270, 529, 197, 757, 196, 910, 196, 910, 5, 1005, -107, 1445, 613, 1573, 2076, 1545, 2193, 835, 2237, -630, 501, -532)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(6, 1541, -153, 596, -500, 581, -772, 664, -1111, 928, -1346, 1125, -1353, 1125, -1580, 1080, -1753, 838, -1700, 732, -1700, 732, -1587, 649, -1361, 626, -1044, 551, -1036, 272, -1882, 543, -2463, 1261, -2758, 1261, -2946, 1102, -3052, 838, -2750, 528, -2750, 521, -2342, 468, -2206, 453, -1640, 83, -1059, -83, -462, 7, -334, 15, -77, -393, -17, -763, -2992, -552, -3264, 188, -3388, 1089, -3456, 1711, -944, 1666)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-432, 1238, -432, 1238, -183, 966, 384, 989, 731, 1510, -409, 1789)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_h2pyf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" parent="CanvasLayer" instance=ExtResource("5_irhf8")]
+position = Vector2(398, -278)
+scale = Vector2(3.44, 1)
+
+[node name="bubble" parent="." instance=ExtResource("1_56hl8")]
+position = Vector2(407, 373)
+
+[node name="Camera2D" type="Camera2D" parent="bubble"]
+zoom = Vector2(0.715, 0.715)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ita70")
+}
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 986.0
+offset_top = 260.0
+offset_right = 1312.0
+offset_bottom = 415.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 151
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -945.0
+offset_top = 493.0
+offset_right = -619.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 151
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 887.0
+offset_top = 431.0
+offset_right = 1213.0
+offset_bottom = 586.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 151
+text = "2
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -882.0
+offset_top = 40.5
+offset_right = -556.0
+offset_bottom = 195.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 151
+text = "3
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1599.0
+offset_top = -77.0
+offset_right = 1968.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 61
+text = "<: 4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2127.0
+offset_top = 1091.0
+offset_right = 2496.0
+offset_bottom = 1292.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 61
+text = "(; 3
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2815.0
+offset_top = 711.0
+offset_right = -2446.0
+offset_bottom = 912.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 61
+text = ":D4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label9" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1674.0
+offset_top = 871.0
+offset_right = -1305.0
+offset_bottom = 1072.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.158778
+pivot_offset = Vector2(176.51, 66)
+theme_override_colors/font_color = Color(0.859064, 0.75954, 0.416754, 1)
+theme_override_colors/font_outline_color = Color(0.147545, 0.282055, 1, 1)
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_jssw2")
+theme_override_font_sizes/font_size = 61
+text = "B) 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(466, 181)
+polygon = PackedVector2Array(299, -241, 715, 63, 868, -11, 1064, -307, 1396, -375, 1552, -187, 1480, 81, 1288, 65, 1104, 85, 802, 201, 799, 300, 1132, 437, 1428, 561, 1640, 561, 1956, 761, 2100, 985, 1974, 1182, 1819, 1161, 1745, 1091, 1702, 979, 1601, 846, 1462, 787, 1232, 739, 954, 611, 704, 524, 270, 529, 197, 757, 196, 910, 196, 910, 5, 1005, -107, 1445, 613, 1573, 2076, 1545, 2193, 835, 2237, -630, 501, -532)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(6, 1541, -153, 596, -500, 581, -772, 664, -1111, 928, -1346, 1125, -1353, 1125, -1580, 1080, -1753, 838, -1700, 732, -1700, 732, -1587, 649, -1361, 626, -1044, 551, -1036, 272, -1882, 543, -2463, 1261, -2758, 1261, -2946, 1102, -3052, 838, -2750, 528, -2750, 521, -2342, 468, -2206, 453, -1640, 83, -1059, -83, -462, 7, -334, 15, -77, -393, -17, -763, -2992, -552, -3264, 188, -3388, 1089, -3456, 1711, -944, 1666)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-432, 1238, -432, 1238, -183, 966, 384, 989, 731, 1510, -409, 1789)
+
+[node name="Polygon2D4" parent="." instance=ExtResource("8_h08ap")]
+position = Vector2(924, 32)
+rotation = -1.93455
+
+[node name="Polygon2D5" parent="." instance=ExtResource("8_h08ap")]
+position = Vector2(-1067, 385)
+rotation = -4.70648
+scale = Vector2(1.09953, 0.615655)
+
+[node name="Polygon2D6" parent="." instance=ExtResource("8_h08ap")]
+position = Vector2(-226, 958)
+rotation = -5.24361
+
+[node name="Polygon2D7" parent="." instance=ExtResource("8_h08ap")]
+position = Vector2(-3005, 1214)
+rotation = -5.24361
+
+[node name="Polygon2D8" parent="." instance=ExtResource("8_h08ap")]
+position = Vector2(579, 1158)
+rotation = -6.64192

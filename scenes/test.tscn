@@ -1,0 +1,216 @@
+[gd_scene load_steps=16 format=3 uid="uid://bmjludsjdwpqy"]
+
+[ext_resource type="Shader" path="res://scripts/background.gdshader" id="1_e5pg5"]
+[ext_resource type="Script" path="res://scenes/lvl1.gd" id="1_qkys2"]
+[ext_resource type="PackedScene" uid="uid://dx8bhud0rb2p5" path="res://scenes/character_body_2d.tscn" id="1_ujgmf"]
+[ext_resource type="Texture2D" uid="uid://d37hliap3hpro" path="res://assets/Br.png" id="2_0ijt3"]
+[ext_resource type="PackedScene" uid="uid://nxhgucnsjgdd" path="res://scenes/bubble.tscn" id="2_7gqbb"]
+[ext_resource type="PackedScene" uid="uid://dnfpkuw403hpm" path="res://scenes/spikestscn.tscn" id="5_8sg0b"]
+[ext_resource type="Shader" path="res://scenes/transition.gdshader" id="7_0twfv"]
+[ext_resource type="PackedScene" uid="uid://cxuucyygxuyi4" path="res://winplace.tscn" id="8_arwfu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rru48"]
+shader = ExtResource("1_e5pg5")
+shader_parameter/background_color = Color(2.55093e-06, 0.349411, 0.47947, 1)
+
+[sub_resource type="Curve" id="Curve_4y4ka"]
+_data = [Vector2(0.779914, 0.758491), 0.0, 0.0, 0, 0, Vector2(0.938034, 0.381132), 0.0, 0.0, 0, 0, Vector2(1, 0.109434), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_llix6"]
+offsets = PackedFloat32Array(0, 0.609302, 1)
+colors = PackedColorArray(0.641934, 0.641934, 0.641934, 0.772549, 0.972549, 0.972549, 0.972549, 0.658824, 0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5cu8"]
+shader = ExtResource("7_0twfv")
+shader_parameter/saw_b_shift = -0.267
+shader_parameter/saw_a_interval = 0.0
+shader_parameter/saw_b_interval = 0.995
+shader_parameter/saw_a_scale = 1.0
+shader_parameter/saw_b_scale = 0.821
+shader_parameter/uv_scale = Vector2(3, 8)
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/right = 0.0
+shader_parameter/left = -1.0
+
+[sub_resource type="Animation" id="Animation_dtd7c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_svpmk"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.0, 3.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ita70"]
+_data = {
+"RESET": SubResource("Animation_dtd7c"),
+"start": SubResource("Animation_svpmk")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_qkys2")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_rru48")
+offset_left = -66.0
+offset_top = -1196.0
+offset_right = 1646.0
+offset_bottom = 1084.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect3"]
+position = Vector2(835, 2093)
+amount = 25
+lifetime = 10.0
+speed_scale = 0.7
+texture = ExtResource("2_0ijt3")
+emission_shape = 3
+emission_rect_extents = Vector2(500, 1)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 10)
+initial_velocity_max = 423.95
+angular_velocity_min = 5.0
+angular_velocity_max = 50.0
+angle_max = 17.3
+scale_amount_min = 0.1
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_4y4ka")
+color_ramp = SubResource("Gradient_llix6")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -1031.0
+offset_top = -3167.0
+offset_right = 2659.0
+offset_bottom = -336.0
+color = Color(0, 1, 1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_rru48")
+offset_left = -66.0
+offset_top = -1196.0
+offset_right = 1646.0
+offset_bottom = 1084.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect"]
+position = Vector2(835, 2093)
+amount = 25
+lifetime = 10.0
+speed_scale = 0.7
+texture = ExtResource("2_0ijt3")
+emission_shape = 3
+emission_rect_extents = Vector2(500, 1)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 10)
+initial_velocity_max = 423.95
+angular_velocity_min = 5.0
+angular_velocity_max = 50.0
+angle_max = 17.3
+scale_amount_min = 0.1
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_4y4ka")
+color_ramp = SubResource("Gradient_llix6")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_ujgmf")]
+position = Vector2(847, -187)
+
+[node name="Polygon2D4" parent="." instance=ExtResource("5_8sg0b")]
+position = Vector2(403, 38)
+rotation = 1.15623
+
+[node name="Polygon2D6" parent="." instance=ExtResource("5_8sg0b")]
+position = Vector2(490, -753)
+rotation = 0.591086
+
+[node name="Polygon2D5" parent="." instance=ExtResource("5_8sg0b")]
+position = Vector2(1105, -274)
+rotation = -1.11899
+
+[node name="bubble" parent="." instance=ExtResource("2_7gqbb")]
+position = Vector2(587, 749)
+
+[node name="Camera2D" type="Camera2D" parent="bubble"]
+position = Vector2(131, -248)
+zoom = Vector2(0.43, 0.43)
+position_smoothing_enabled = true
+position_smoothing_speed = 5.115
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(823, 952, 1025, 625, 917, 54, 1110, -336, 859, -628, 1026, -1005, 1031, -1333, 3885, -1320, 3784, 1409)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D/StaticBody2D"]
+polygon = PackedVector2Array(823, 952, 1025, 625, 917, 54, 1110, -336, 859, -628, 1026, -1005, 1031, -1333, 2446, -1350, 2378, 998)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(1293, 3140)
+rotation = 4.57485
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(1865, -3948.58, 2446, -1350, 2378, 998, 1135.21, 2957.58, -1347.91, -976.027)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Polygon2D2"]
+position = Vector2(3287.63, -850.27)
+rotation = 1.70834
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D2/StaticBody2D3"]
+position = Vector2(1500, -386)
+rotation = 3.05917
+polygon = PackedVector2Array(-1283.05, -1036.15, 3059.66, -1254.36, 2856.48, -4892.44)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+position = Vector2(1509, -390)
+rotation = 3.05695
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(823, 952, 926.739, 420.853, 974.378, 107.76, 1110, -336, 984.103, -728.411, 1026, -1005, 1031, -1333, 3764.33, -1689.81, 3501.64, 1205.34)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Polygon2D3"]
+position = Vector2(1536.57, -261.033)
+rotation = -3.05695
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D3/StaticBody2D2"]
+position = Vector2(1500, -386)
+rotation = 3.05917
+polygon = PackedVector2Array(823, 952, 926.739, 420.853, 974.378, 107.76, 1110, -336, 984.103, -728.411, 1026, -1005, 1031, -1333, 2446, -1350, 2378, 998)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_b5cu8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" parent="CanvasLayer" instance=ExtResource("8_arwfu")]
+position = Vector2(806, -1280)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ita70")
+}
